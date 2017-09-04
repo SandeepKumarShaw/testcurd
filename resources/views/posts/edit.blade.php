@@ -4,10 +4,10 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Post</h2>
+            <h2>Edit Post</h2>
         </div>
         <div class="pull-right">
-        	<br/>
+            <br/>
             <a class="btn btn-primary" href="{{ route('index') }}"> <i class="glyphicon glyphicon-arrow-left"></i></a>
         </div>
     </div>
@@ -23,22 +23,22 @@
     </div>
 @endif  
 <div class="row">
-<form action="{{ route('store') }}" method="post">
+<form action="{{ route('update', $post->id) }}" method="post">
 {!! Form::token() !!}
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Title:</strong>
-            <input type="text" name="title" placeholder="Title" class="form-control">       
+            <input type="text" name="title" placeholder="Title" value="{{ $post->title }}" class="form-control">       
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Content:</strong>
-            <textarea name="content" placeholder="Content" class="form-control" style="height:100px;"></textarea>          
+            <textarea name="content" placeholder="Content"  class="form-control" style="height:100px;">{{ $post->content }}</textarea>          
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Update</button>
     </div>
 </form>
 </div>

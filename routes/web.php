@@ -17,5 +17,11 @@
 
 Route::get('/',['as'=>'index','uses'=>'PostController@index']);
 Route::get('/create',['as'=>'create','uses'=>'PostController@create']);
-Route::post('/show',['as'=>'show','uses'=>'PostController@show']);
+Route::post('/store',['as'=>'store','uses'=>'PostController@store']);
+Route::get('/posts/delete/{id}',['as'=>'destroy','uses'=>'PostController@destroy']);
+Route::get('/posts/show/{id}',['as'=>'show','uses'=>'PostController@show']);
+Route::get('/posts/edit/{id}',['as'=>'edit','uses'=>'PostController@edit']);
+Route::post('/posts/update/{id}',['as'=>'update','uses'=>'PostController@update']);
+
+
 
