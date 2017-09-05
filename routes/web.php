@@ -22,6 +22,8 @@ Route::get('/posts/delete/{id}',['as'=>'destroy','uses'=>'PostController@destroy
 Route::get('/posts/show/{id}',['as'=>'show','uses'=>'PostController@show']);
 Route::get('/posts/edit/{id}',['as'=>'edit','uses'=>'PostController@edit']);
 Route::post('/posts/update/{id}',['as'=>'update','uses'=>'PostController@update']);
+Route::get('/itemlist',['as'=>'manageItemAjax','uses'=>'ItemAjaxController@manageItemAjax']);
+Route::post('/itemlist/iteminsert',['as'=>'itemInsertPost','uses'=>'ItemAjaxController@itemInsertPost']);
 
 
 

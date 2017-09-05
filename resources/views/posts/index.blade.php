@@ -21,6 +21,9 @@
         <th width="140px" class="text-center">
             <a class="btn btn-success btn-sm" href="{{ route('create') }}"><i class="glyphicon glyphicon-plus"></i></a>
         </th>
+        <th width="140px" class="text-center">
+            <a class="btn btn-danger btn-sm" href="{{ route('manageItemAjax') }}">AJAX Curd</a>
+        </th>
     </tr>
     
     @foreach($posts as $key => $p)
