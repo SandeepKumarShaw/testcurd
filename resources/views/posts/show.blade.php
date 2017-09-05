@@ -52,6 +52,19 @@
 
     </div>
 
+    <div class="col-xs-12 col-sm-12 col-md-12">
+
+        <div class="form-group">
+
+            <strong>Image:</strong>
+            <img src="{{ asset('images') }}/{{ $post->image_file }}">
+            
+
+        </div>
+
+    </div>
+
+
 </div>
 
 @endsection
