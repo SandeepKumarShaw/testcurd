@@ -48,6 +48,8 @@
                 <h4 class="modal-title" id="myModalLabel">Create Item</h4>
               </div>
               <div class="modal-body">
+              <div id="result"></div>
+ <form enctype="multipart/form-data" id="contact_form" role="form" method="POST" action="" >            
 <input type="hidden" id="token" value="{{ csrf_token() }}">
                         <div class="form-group">
                             <label class="control-label" for="title">Title:</label>
@@ -67,7 +69,8 @@
                         <div class="form-group">
                             <button type="submit" class="btn crud-submit btn-success btn-sava-item">Submit</button>
                         </div>
-              </div>
+                    </form>
+                          </div>
             </div>
           </div>
         </div>
@@ -82,19 +85,57 @@
         $('#create-manage-form').on('click',function(){
             $('#create-item').modal();
         });
-        $('.btn-sava-item').on('click',function(e){
-            e.preventDefault();
-            var title       = $('#title').val();
-            //alert(title);
-            var description = $('#description').val();
-            var photo       = $('#photo').val();
-            data: $( '#personalDataForm' ).serialize()
-            //alert(photo);
-            $.post("{{ route('itemInsertPost') }}",{title:title,description:description,photo:photo},function(data){
-                console.log(data);
+        
+$('.btn-sava-item').on('click',function(e){
+ 
+  e.preventDefault();
+ 
+    var title          = $('input[name=title]').val(); 
+    var description    = $('textarea[name=description]').val();
+    var photo          = $('input[name=photo]')[0].files[0];
 
+    var proceed = true;
+    if(title==""){ 
+        $('input[name=title]').css('border-color','red'); 
+        proceed = false;
+    }
+    if(description==""){ 
+        $('textarea[name=description]').css('border-color','red'); 
+        proceed = false;
+    }
+    if(proceed){
+        var post_data = new FormData();    
+        post_data.append( 'title', title );
+        post_data.append( 'photo', photo );
+        post_data.append( 'description', description );    
+            $.ajax({
+              url: "{{ route('itemInsertPost') }}",
+              data: post_data,
+              processData: false,
+              contentType: false,
+              type: 'POST',
+              dataType:'json',
+              success: function(data){
+                   console.log(data);
+                  /* if(data.type == 'error'){
+                      output = '<div class="error">'+data.text+'</div>';
+                   }else{
+                      output = '<div class="success">'+data.text+'</div>';            
+                      //reset values in all input fields
+                      $('#contact_form input').val(''); 
+                      $('#contact_form textarea').val(''); 
+                    }          
+                      $("#result").hide().html(output).slideDown();          
+                      $(".btn-sava-item").show();*/
+              }
             });
-        });
+        }        
     });
+  //reset previously set border colors and hide all message on .keyup()
+    $("#contact_form input, #contact_form textarea").keyup(function() { 
+        $("#contact_form input, #contact_form textarea").css('border-color',''); 
+        $("#result").slideUp();
+    });
+});
 </script>
 @endsection
