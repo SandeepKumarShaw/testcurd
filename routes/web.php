@@ -13,8 +13,8 @@
 
 /*Route::get('/', function () {
     return view('welcome');
-});*/
-
+});
+*/
 Route::get('/',['as'=>'index','uses'=>'PostController@index']);
 Route::get('/create',['as'=>'create','uses'=>'PostController@create']);
 Route::post('/store',['as'=>'store','uses'=>'PostController@store']);
@@ -24,6 +24,8 @@ Route::get('/posts/edit/{id}',['as'=>'edit','uses'=>'PostController@edit']);
 Route::post('/posts/update/{id}',['as'=>'update','uses'=>'PostController@update']);
 Route::get('/itemlist',['as'=>'manageItemAjax','uses'=>'ItemAjaxController@manageItemAjax']);
 Route::post('/itemlist/iteminsert',['as'=>'itemInsertPost','uses'=>'ItemAjaxController@itemInsertPost']);
+Route::get('/itemlist/itemedit',['as'=>'itemEditPost','uses'=>'ItemAjaxController@itemEditPost']);
+Route::get('/itemlist/itemupdate',['as'=>'itemUpdatePost','uses'=>'ItemAjaxController@itemUpdatePost']);
 
 
 

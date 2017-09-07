@@ -14,7 +14,11 @@
     {!! Html::script('js/jquery.js') !!}
     {!! Html::script('js/jquery-1.8.3.min.js') !!}
     {!! Html::script('js/bootstrap.min.js') !!}
-
+    <script>
+    
+            var BASE_URL = "{{ URL::to('/') }}";
+ 
+   </script> 
     @yield('script')
     <script>
       $(document).ready(function(){
@@ -24,7 +28,8 @@
             }
         });
       });
-    </script>    
+
+     </script>    
 </head>
 <body>
 <div class="container">
