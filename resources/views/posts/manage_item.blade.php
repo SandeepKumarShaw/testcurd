@@ -220,33 +220,31 @@ $('.btn-sava-item').on('click',function(e){
       var description    = $('textarea[name=description1]').val();
       var photo          = $('input[name=photo1]')[0].files[0];
       var proceed = true;
-    /*  if(title==""){ 
-          $('input[name=title]').css('border-color','red'); 
+      if(title==""){ 
+          $('input[name=title1]').css('border-color','red'); 
           proceed = false;
       }
       if(description==""){ 
-          $('textarea[name=description]').css('border-color','red'); 
+          $('textarea[name=description1]').css('border-color','red'); 
           proceed = false;
-      }*/
+      }
      // alert(proceed);
       if(proceed){
-          /*var post_data = new FormData();   
-          post_data.append( 'id', id ); 
+          var post_data = new FormData(); 
           post_data.append( 'title', title );
           post_data.append( 'photo', photo );
-          post_data.append( 'description', description ); 
-          alert(post_data);*/
-          var url = BASE_URL + '/itemlist/itemupdate';
+          post_data.append( 'description', description );           
+          var url = BASE_URL + '/itemlist/itemupdate' + '/' + dataId;
 
           $.ajax({
               url: url,
-              data: {id:dataId,title:title,description:description},
+              data: post_data,
               processData: false,
               contentType: false,
               type: 'POST',
               dataType:'json',
               success: function(data){
-                     // console.log(data);
+                      console.log(data);
                       if(data.status == 'success') {
                         output = '<div class="success">'+data.msg+'</div>';            
                         //reset values in all input fields
