@@ -25,7 +25,7 @@ Route::post('/posts/update/{id}',['as'=>'update','uses'=>'PostController@update'
 Route::get('/itemlist',['as'=>'manageItemAjax','uses'=>'ItemAjaxController@manageItemAjax']);
 Route::post('/itemlist/iteminsert',['as'=>'itemInsertPost','uses'=>'ItemAjaxController@itemInsertPost']);
 Route::get('/itemlist/itemedit',['as'=>'itemEditPost','uses'=>'ItemAjaxController@itemEditPost']);
-Route::get('/itemlist/itemupdate',['as'=>'itemUpdatePost','uses'=>'ItemAjaxController@itemUpdatePost']);
+Route::any('/itemlist/itemupdate',['as'=>'itemUpdatePost','uses'=>'ItemAjaxController@itemUpdatePost']);
 
 
 

@@ -99,21 +99,21 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="title">Title:</label>
-                            <input type="text" name="title" id="title1" value="" class="form-control" value="" data-error="Please enter title." required />
+                            <input type="text" name="title1" id="title1" value="" class="form-control" value="" data-error="Please enter title." required />
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="title">Description:</label>
-                            <textarea name="description" id="description1" class="form-control" data-error="Please enter description." required></textarea>
+                            <textarea name="description1" id="description1" class="form-control" data-error="Please enter description." required></textarea>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="title">Image:</label>
-                            <input type="file" name="photo" id="photo1" class="form-control" data-error="Please select image." required>
+                            <input type="file" name="photo1" id="photo1" class="form-control" data-error="Please select image." required>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn crud-submit btn-success btn-edit-item">Update</button>
+                            <button type="submit" class="btn crud-submit btn-success btn-edit-item testbutton">Update</button>
                         </div>
                     </form>
                           </div>
@@ -213,13 +213,12 @@ $('.btn-sava-item').on('click',function(e){
         readURL(this);
     });
     
-    $('.btn-edit-item').on('click',function(e){
- 
-      e.preventDefault();
-      var dataId         = $('input[name=id]').val();
-      var title          = $('input[name=title]').val(); 
-      var description    = $('textarea[name=description]').val();
-      var photo          = $('input[name=photo]')[0].files[0];
+    $('.testbutton').click(function(e){ 
+       e.preventDefault();
+      var dataId         = $('input[name=id]').val(); //alert(dataId);
+      var title          = $('input[name=title1]').val();  //alert(title);
+      var description    = $('textarea[name=description1]').val();
+      var photo          = $('input[name=photo1]')[0].files[0];
       var proceed = true;
     /*  if(title==""){ 
           $('input[name=title]').css('border-color','red'); 
@@ -229,18 +228,22 @@ $('.btn-sava-item').on('click',function(e){
           $('textarea[name=description]').css('border-color','red'); 
           proceed = false;
       }*/
+     // alert(proceed);
       if(proceed){
-          var post_data = new FormData();   
-          //post_data.append( 'id', id ); 
+          /*var post_data = new FormData();   
+          post_data.append( 'id', id ); 
           post_data.append( 'title', title );
           post_data.append( 'photo', photo );
           post_data.append( 'description', description ); 
+          alert(post_data);*/
+          var url = BASE_URL + '/itemlist/itemupdate';
+
           $.ajax({
-              url: "{{ route('itemUpdatePost') }}",
-              data: {post_data:post_data},
+              url: url,
+              data: {id:dataId,title:title,description:description},
               processData: false,
               contentType: false,
-              type: 'GET',
+              type: 'POST',
               dataType:'json',
               success: function(data){
                      // console.log(data);
@@ -254,7 +257,11 @@ $('.btn-sava-item').on('click',function(e){
               }
             });   
       }
-  });
+
+    });
+ 
+     
+  
 
 });
 </script>
