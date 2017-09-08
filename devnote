@@ -1,7 +1,17 @@
 
 # Curd Operation
-V1.0 Insert delete update and view operation
-v2.0 Image upload with full functionality finish
-v4.0 setting up pop up form for ajax insert
-V5.0 Ajax view portion completed
-v6.0 Ajax view curd operation ajax fire
+    V1.0 version released
+     1. Insert delete update and view operation.
+   v2.0 version released
+     1. Image upload with full functionality finish.
+   v4.0 version released
+     1. setting up pop up form for ajax insert.
+   V5.0 version released
+     1. Ajax view portion completed.
+    v6.0 version released
+     1. Ajax view curd operation ajax fire.
+	v7.0 version released
+     1. Ajax update form data with image.
+	 2. Old image deleted and upload new one.
+	 
+
