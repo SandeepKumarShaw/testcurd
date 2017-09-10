@@ -28,5 +28,11 @@ Route::get('/itemlist/itemedit',['as'=>'itemEditPost','uses'=>'ItemAjaxControlle
 Route::any('/itemlist/itemupdate/{id}',['as'=>'itemUpdatePost','uses'=>'ItemAjaxController@itemUpdatePost']);
 Route::any('/itemlist/itemdelete/{id}',['as'=>'itemDeletePost','uses'=>'ItemAjaxController@itemDeletePost']);
 
+//===============================image thumnail upload
+
+Route::get('intervention-resizeImage',['as'=>'intervention.getresizeimage','uses'=>'FileController@getResizeImage']);
+Route::post('intervention-resizeImage',['as'=>'intervention.postresizeimage','uses'=>'FileController@postResizeImage']);
+
+
 
 
