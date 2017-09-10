@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Item;
 use DB;
 use File;
 class ItemAjaxController extends Controller{
    public function manageItemAjax(Request $request){
-     $result = DB::table('items')->paginate(4);
-   	 return view('posts.manage_item',compact('result'))->with('i', ($request->input('page', 1) - 1) * 4);
+     $result = DB::table('items')->paginate(3);
+   	 return view('posts.manage_item',compact('result'))->with('i', ($request->input('page', 1) - 1) * 3);
    }
    public function itemInsertPost(Request $request){
      if($request->ajax()){
@@ -37,18 +37,12 @@ class ItemAjaxController extends Controller{
      }
    }
   public function itemUpdatePost(Request $request,$id){   
-          //$data = Item::all();
+          $data = Item::all();
           if($request->hasFile('photo')){            
-              $item = Item::find($request->id);
-              
-              $input['title'] = $request->title;
-              $input['description'] = $request->description;
-
+              $item = Item::find($request->id);            
               $image = $request->file('photo');
-
               $input['photo'] = time().'.'.$image->getClientOriginalExtension();
               $destinationPath = public_path('/images');
-              //File::delete($destinationPath, $item->photo);
               File::delete('images/' . $item->photo);
               $image->move($destinationPath, $input['photo']);        
               $input['title'] = $request->title;
@@ -57,9 +51,31 @@ class ItemAjaxController extends Controller{
                   'status' => 'success',
                   'msg' => 'Item updated successfully',
               );
-            Item::find($request->id)->update($input);
+             Item::find($request->id)->update($input);
+
             return \Response::json($response);
-          }
+          }else{
+              $item = Item::find($request->id);
+              $input['description'] = $request->description;
+              $input['title'] = $request->title;
+              $input['photo'] = Input::get('oldphoto');
+              $response = array(
+                  'status' => 'success',
+                  'msg' => 'Item updated successfully',
+              );
+            Item::find($request->id)->update($input);  
+            return \Response::json($response);
+          }           
+  }
+  public function itemDeletePost(Request $request,$id){
+    $item = Item::find($request->id);
+    File::delete('images/' . $item->photo);
+    Item::find($request->id)->delete();
+    $response = array(
+                  'status' => 'success',
+                  'msg' => 'Item deleted successfully',
+    );
+    return \Response::json($response);
   }
    
 }
