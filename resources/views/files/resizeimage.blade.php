@@ -18,7 +18,7 @@
             <strong>Image Before Resize:</strong>
         </div>
         <div class="col-md-8">    
-            <img src="{{asset('images/normal_images/'.Session::get('imagename')) }}" />
+            <img src="{{asset('images/normal_images/'.Session::get('photo')) }}" />
         </div>
         </div>
         <div class="col-md-12" style="margin-top:10px;">
@@ -26,24 +26,29 @@
             <strong>Image after Resize:</strong>
         </div>
         <div class="col-md-8">    
-            <img src="{{asset('images/thumbnail_images/'.Session::get('imagename')) }}" />
+            <img src="{{asset('images/thumbnail_images/'.Session::get('photo')) }}" />
         </div>
         </div>
     </div>
     @endif
-    {!! Form::open(array('route' => 'intervention.postresizeimage','files'=>true)) !!}
+    <form action="{{ route('intervention.postresizeimage') }}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+
+
         <div class="row">
         
             <div class="col-md-6">
                 <br/>
-                {!! Form::file('photo', array('class' => 'form-control')) !!}
+                <input type="file" class="form-control" name="photo">
+
+                
             </div>
             <div class="col-md-6">
                 <br/>
                 <button type="submit" class="btn btn-primary">Upload Image</button>
             </div>
         </div>
-    {!! Form::close() !!}
+    </form>
  </div>
 </div>
 @endsection
