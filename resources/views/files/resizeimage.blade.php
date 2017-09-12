@@ -1,8 +1,32 @@
 @extends('layouts.default')
 @section('content')
 <div class="panel panel-primary">
- <div class="panel-heading">Laravel Intervention upload image after resize</div>
+ <div class="panel-heading">Laravel upload image display after resize</div>
   <div class="panel-body"> 
+<div class="row">
+<div class="col-md-12">
+<table class="table table-striped table-condensed voc_list ">
+<thead>
+<tr>
+<th style="width:30%;">Sl.</th>
+<th style="width:40%;">Image(100x)</th>
+<th style="width:30%;">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="listview">
+<td>1</td>
+<td> 
+<img src="" alt="" title="" />
+</td>
+<td style="width: 50%;">
+View
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+  </div>
     @if (count($errors) > 0)
     <div class="alert alert-danger">
         @foreach ($errors->all() as $error)
@@ -10,25 +34,10 @@
         @endforeach
     </div>
     @endif
-    @if (Session::get('success'))
-    
-    <div class="row">
-        <div class="col-md-12">
-        <div class="col-md-4">
-            <strong>Image Before Resize:</strong>
-        </div>
-        <div class="col-md-8">    
-            <img src="{{asset('images/normal_images/'.Session::get('photo')) }}" />
-        </div>
-        </div>
-        <div class="col-md-12" style="margin-top:10px;">
-        <div class="col-md-4">
-            <strong>Image after Resize:</strong>
-        </div>
-        <div class="col-md-8">    
-            <img src="{{asset('images/thumbnail_images/'.Session::get('photo')) }}" />
-        </div>
-        </div>
+
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success">
+        {{ $message }}
     </div>
     @endif
     <form action="{{ route('intervention.postresizeimage') }}" method="post" enctype="multipart/form-data">
