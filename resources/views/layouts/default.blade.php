@@ -32,6 +32,18 @@
      </script>    
 </head>
 <body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{ route('index') }}">LaravelExample</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{{ route('index') }}">Home</a></li>
+      <li><a href="{{ route('manageItemAjax') }}">AJAX Curd</a></li>
+      <li><a href="{{ route('intervention.getresizeimage') }}">ThubnailGenator</a></li>      
+    </ul>
+  </div>
+</nav>
 <div class="container">
     @yield('content')
 </div>

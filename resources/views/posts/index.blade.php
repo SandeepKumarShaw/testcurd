@@ -1,11 +1,15 @@
 @extends('layouts.default')
 @section('content')
 <div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Post Listing Here</h2>
-        </div>
-    </div>
+            <div class="col-lg-12 margin-tb">                   
+                <div class="pull-left">
+                    <h2>Laravel CRUD Example</h2>
+                </div>
+                <div class="pull-right">
+                <a class="btn btn-success btn-sm" href="{{ route('create') }}">Create item</a>
+                </div>
+            </div>
+            <div id="delmsg"></div>
 </div>
 @if($message = Session::get('success'))
     <div class="alert alert-success">
@@ -19,11 +23,9 @@
         <th>Content</th>
         <th>Image</th>
         <th width="140px" class="text-center">
-            <a class="btn btn-success btn-sm" href="{{ route('create') }}"><i class="glyphicon glyphicon-plus"></i></a>
+            Action
         </th>
-        <th width="140px" class="text-center">
-            <a class="btn btn-danger btn-sm" href="{{ route('manageItemAjax') }}">AJAX Curd</a>
-        </th>
+       
     </tr>
     
     @foreach($posts as $key => $p)
@@ -33,7 +35,7 @@
         <td>{{ $p->content }}</td>
         <td>
         @if($p->image_file)
-        <img src="{{ asset('images') }}/{{ $p->image_file }}" style="height: 200px;width: 200px;">
+        <img src="{{ asset('images') }}/{{ $p->image_file }}" style="height: 100px;width: 100px;">
         @endif
         </td>
         <td>

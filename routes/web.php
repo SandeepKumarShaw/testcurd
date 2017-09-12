@@ -31,7 +31,10 @@ Route::any('/itemlist/itemdelete/{id}',['as'=>'itemDeletePost','uses'=>'ItemAjax
 //===============================image thumnail upload
 
 Route::get('intervention-resizeImage',['as'=>'intervention.getresizeimage','uses'=>'FileController@getResizeImage']);
-Route::post('intervention-resizeImage',['as'=>'intervention.postresizeimage','uses'=>'FileController@postResizeImage']);
+Route::get('/thumbcreate',['as'=>'thumbcreate','uses'=>'FileController@thumbcreate']);
+Route::post('/thumbstore',['as'=>'thumbstore','uses'=>'FileController@postResizeImage']);
+Route::get('/thumshow/{id}',['as'=>'thumshow','uses'=>'FileController@postViewImage']);
+
 
 
 

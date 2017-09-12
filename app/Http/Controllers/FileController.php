@@ -9,13 +9,16 @@ use App\Photo;
 class FileController extends Controller
 {
     public function getResizeImage(){
-        //$result = Photo::all();
-        return view('files.resizeimage');
+        $results = Photo::all();
+
+        return view('files.resizeimage', compact('results'));
 
     }
+    public function thumbcreate(){
+        return view('files.thumgenerate');
+    }
     public function postResizeImage(Request $request){     
-
-
+        $this->validate($request, ['photo' => 'required']);   
         $image = $request->file('photo');
         $input['photo'] = time().'.'.$image->getClientOriginalExtension();
         $destinationPath = public_path('/images');
@@ -28,7 +31,7 @@ class FileController extends Controller
         // create instance
         $img = Image::make($img_path);
 
-        // resize the image to a width of 300 and constrain aspect ratio (auto height)
+        // resize the image to a width of 100 and constrain aspect ratio (auto height)
         $img->resize(100, null, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
@@ -39,7 +42,13 @@ class FileController extends Controller
             $constraint->aspectRatio();
             $constraint->upsize();
         })->save($medium_dir2);
+
         Photo::create($input);
-        return view('files.resizeimage')->with('success','Image Upload successful');
-    }    
+        return redirect()->route('intervention.getresizeimage')->with('success','Image Upload successful');      
+    }
+    public function postViewImage($id){
+         $result = Photo::find($id);
+         return view('files.resizeimageview',compact('result'));
+    }
+     
 }
