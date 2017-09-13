@@ -9,11 +9,15 @@
     
     {!! Html::style('css/bootstrap.min.css') !!}
     {!! HTML::style('css/bootstrap-theme.css') !!}
+    {!! HTML::style('css/bootstrap-glyphicons.css') !!}
+
     @yield('style')  
 
     {!! Html::script('js/jquery.js') !!}
     {!! Html::script('js/jquery-1.8.3.min.js') !!}
     {!! Html::script('js/bootstrap.min.js') !!}
+
+    
     <script>
     
             var BASE_URL = "{{ URL::to('/') }}";
@@ -22,14 +26,20 @@
     @yield('script')
     <script>
       $(document).ready(function(){
-            $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-      });
+              $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
+        $('ul.nav > li').click(function () {
+            //e.preventDefault();
+               $('ul.nav > li').removeClass('active');
+               $(this).addClass('active');                
+        });    
+      });    
+    </script>  
 
-     </script>    
+
 </head>
 <body>
 <nav class="navbar navbar-default">

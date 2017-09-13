@@ -9,8 +9,10 @@ use App\Photo;
 class FileController extends Controller
 {
     public function getResizeImage(){
-        $results = Photo::all();
+        //$results = Photo::all();
 
+        $results = Photo::paginate(2);
+       
         return view('files.resizeimage', compact('results'));
 
     }

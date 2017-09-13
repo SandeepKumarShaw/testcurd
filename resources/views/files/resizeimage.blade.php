@@ -43,5 +43,5 @@
 @endforeach
 @endif  
 </table> 
-
+{{ $results->links() }}
 @endsection
