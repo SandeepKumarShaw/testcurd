@@ -51,7 +51,7 @@
       <li class="active"><a href="{{ route('index') }}">Home</a></li>
       <li><a href="{{ route('manageItemAjax') }}">AJAX Curd</a></li>
       <li><a href="{{ route('intervention.getresizeimage') }}">ThubnailGenator</a></li>
-      <li><a href="{{ route('login') }}">Login</a></li>            
+      <li><a href="{{ route('mainlog') }}">Login</a></li>            
     </ul>
   </div>
 </nav>
