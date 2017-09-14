@@ -15,6 +15,8 @@
     return view('welcome');
 });
 */
+
+
 Route::get('/',['as'=>'index','uses'=>'PostController@index']);
 Route::get('/create',['as'=>'create','uses'=>'PostController@create']);
 Route::post('/store',['as'=>'store','uses'=>'PostController@store']);
@@ -34,6 +36,29 @@ Route::get('intervention-resizeImage',['as'=>'intervention.getresizeimage','uses
 Route::get('/thumbcreate',['as'=>'thumbcreate','uses'=>'FileController@thumbcreate']);
 Route::post('/thumbstore',['as'=>'thumbstore','uses'=>'FileController@postResizeImage']);
 Route::get('/thumshow/{id}',['as'=>'thumshow','uses'=>'FileController@postViewImage']);
+
+use App\User;
+
+Route::get('add', function(){
+	$user = new User;
+	$user->lname = 'askal';
+	$user->fname = 'piyolo';
+	$user->mname = 'wawawe';
+	$user->email = 'email@yahoo.com';
+	$user->username = 'admin456';
+	$user->password = bcrypt('admin456');
+	$user->save();
+	});
+
+Route::get('/main', [
+	'as'=> 'main',
+	'uses'=> 'AuthController@main'
+]);
+Route::post('/login', [
+	'as'=> 'login',
+	'uses'=> 'AuthController@login'
+]);
+
 
 
 
