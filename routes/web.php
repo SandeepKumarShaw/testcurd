@@ -57,6 +57,7 @@ Route::post('/login', [
 Route::group(['middleware'=>['prevent-back-history']],function(){
 	Route::get('/logout', ['as'=> 'logout','uses'=>'StaffController@logout']);
 	Route::get('/staff/main', ['as'=> 'staff','uses'=> 'StaffController@staff']);
+	Route::post('/staff/additem',['as'=>'add_item', 'uses'=>'StaffController@add_item']);
 });
 
 

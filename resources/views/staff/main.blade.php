@@ -25,7 +25,9 @@
 				<h3 class="text-center">Utility Inventory List</h3>
 			</div>
 			<div class="panel-body">
-				
+				@if(Session::has('item'))
+					<div class="alert alert-success">{{Session::get('item')}}</div>
+				@endif
 				<div>
 					<a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#newItems">New</a>
 
@@ -47,16 +49,52 @@
 						</tr>
 					</thead>
 					<tbody>
+					@foreach($items as $key => $item)
 						<tr>
-							<td>abc</td>
-							<td>1</td>
-							<td>1/2/12</td>
+							<td>{{ $item->name }}</td>
+							<td>{{ $item->quantity }}</td>
+							<td>{{ $item->user_id }}</td>
+							<td>{{ $item->created_at }}</td>
 							<td>del</td>
 						</tr>
+				    @endforeach		
 					</tbody>
 				</table>
 			</div>
 			<div class="text-center"></div>
 		</div>
+			<div class="modal fade" id="newItems">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3>Enter New Items</h3>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" action="{{route('add_item')}}" method="POST">
+						<div class="form-group">
+							<label class="control-label col-md-3">Item Name</label>
+							<div class="col-md-8">
+								<input type="text" name="name" class="form-control" required="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Item Quantity</label>
+							<div class="col-md-8">
+								<input type="number" name="quantity" class="form-control" required="">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-8 col-md-offset-3">
+								<button class="btn btn-primary" type="submit">Submit</button>
+							</div>
+							
+						</div>
+						{{csrf_field()}}
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	</div>
 @endsection
