@@ -52,12 +52,24 @@ Route::post('/login', [
 
 
 
+Route::any('/staff/staffitem/{staffitem_id}', ['as'=>'staff_borrow', 'uses'=>'StaffController@staff_borrow']);
 
+Route::post('/staff/staffitem2/{staffitem_id}', ['as'=>'borrow_item', 'uses'=>'StaffController@borrow_item']);
+
+Route::get('/staff/{staffitem_id}/borrowed_item', [
+	'as'=> 'view_borrowed_item',
+	'uses'=> 'StaffController@view_borrowed_item'
+]);
+Route::get('/staff/{staffitem_id}/{borrowed_id}/', [
+	'as'=> 'staff_return',
+	'uses'=> 'StaffController@staff_return'
+]);
 
 Route::group(['middleware'=>['prevent-back-history']],function(){
 	Route::get('/logout', ['as'=> 'logout','uses'=>'StaffController@logout']);
 	Route::get('/staff/main', ['as'=> 'staff','uses'=> 'StaffController@staff']);
 	Route::post('/staff/additem',['as'=>'add_item', 'uses'=>'StaffController@add_item']);
+	
 });
 
 

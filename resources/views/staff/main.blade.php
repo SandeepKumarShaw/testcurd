@@ -1,4 +1,6 @@
 @extends('layouts.default')
+
+
 @section('content')
 	<div class="jumbotron">
 		<h2 class="text-center">Utility Inventory System</h2>
@@ -12,7 +14,7 @@
 				<p><strong>Name:</strong>{{Auth::user()->fname}} {{Auth::user()->mname}} {{Auth::user()->lname}}</p>
 
 				<ul class="nav nav-pills nav-stacked">
-				  <li role="presentation" class="active"><a href="">List</a></li>
+				  <li role="presentation" class="active"><a href="{{ route('staff') }}">List</a></li>
 				  <li role="presentation"><a href="{{ route('logout') }}">Logout</a></li>
 				  
 				</ul>
@@ -28,23 +30,14 @@
 				@if(Session::has('item'))
 					<div class="alert alert-success">{{Session::get('item')}}</div>
 				@endif
-				<div>
-					<a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#newItems">New</a>
 
-					<form class="pull-right" action="" method="POST">
-						
-						<input type="text" name="search" class="" required="">
-						<button type="submit" class="btn btn-info btn-xs">Search</button>
-						{{csrf_field()}}
-					</form>
-				</div>
 				<table class="table">
 					<thead>
 						<tr>
 							<th>Item Name</th>
 							<th>Quantity</th>
 							<th>Borrowed</th>
-							<th>Date</th>
+							
 							<th>Action</th>
 						</tr>
 					</thead>
@@ -52,16 +45,16 @@
 					@foreach($items as $key => $item)
 						<tr>
 							<td>{{ $item->name }}</td>
-							<td>{{ $item->quantity }}</td>
-							<td>{{ $item->user_id }}</td>
-							<td>{{ $item->created_at }}</td>
-							<td>del</td>
+							<td><span class="badge" style="background-color: blue;" id="quantities">{{ $item->quantity }}</span></td>
+							<td><a href="{{route('view_borrowed_item', ['staffitem_id'=> $item->id])}}"><span class="badge" style="background-color: red;" id="borrowed">{{$item->borrowed_item($item->id)}}</span></a></td>
+							
+					<td><a href="{{ route('staff_borrow', ['staffitem_id'=>$item->id]) }}" class="btn btn-danger btn-xs">Borrow</a></td>
 						</tr>
 				    @endforeach		
 					</tbody>
 				</table>
 			</div>
-			<div class="text-center"></div>
+			<div class="text-center">{{$items->render()}}</div>
 		</div>
 			<div class="modal fade" id="newItems">
 		<div class="modal-dialog">
