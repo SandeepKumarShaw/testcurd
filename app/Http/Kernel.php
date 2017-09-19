@@ -57,5 +57,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
+        'authen'=> \App\Http\Middleware\Authen::class,
     ];
 }
