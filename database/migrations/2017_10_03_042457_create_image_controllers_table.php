@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBorrowerItemsTable extends Migration
+class CreateImageControllersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateBorrowerItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('borrower_items', function (Blueprint $table) {
+        Schema::create('image_controllers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('borrower_id');
-            $table->integer('staffitem_id');
-            $table->integer('quantity');
-            $table->integer('status');
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateBorrowerItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('borrower_items');
+        Schema::dropIfExists('image_controllers');
     }
 }

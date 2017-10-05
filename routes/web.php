@@ -30,29 +30,21 @@ Route::get('/itemlist/itemedit',['as'=>'itemEditPost','uses'=>'ItemAjaxControlle
 Route::any('/itemlist/itemupdate/{id}',['as'=>'itemUpdatePost','uses'=>'ItemAjaxController@itemUpdatePost']);
 Route::any('/itemlist/itemdelete/{id}',['as'=>'itemDeletePost','uses'=>'ItemAjaxController@itemDeletePost']);
 
-//===============================image thumnail upload
+//=============================image thumnail upload==============================//
 
 Route::get('intervention-resizeImage',['as'=>'intervention.getresizeimage','uses'=>'FileController@getResizeImage']);
 Route::get('/thumbcreate',['as'=>'thumbcreate','uses'=>'FileController@thumbcreate']);
 Route::post('/thumbstore',['as'=>'thumbstore','uses'=>'FileController@postResizeImage']);
 Route::get('/thumshow/{id}',['as'=>'thumshow','uses'=>'FileController@postViewImage']);
 
-//==================================
+//======================================================================//
+Route::get('/image-upload', ['as'=> 'imageUpload','uses'=> 'ImageControllerController@imageUpload']);
+Route::post('/image-upload-suc', ['as'=> 'imageUploadSuc','uses'=> 'ImageControllerController@imageUploadSuc']);
 
-Route::get('/mainlog', [
-	'as'=> 'mainlog',
-	'uses'=> 'AuthController@mainlog'
-]);
+//=================================================================================//
 
-
-Route::post('/login', [
-	'as'=> 'login',
-	'uses'=> 'AuthController@login'
-]);
-
-
-
-
+Route::get('/mainlog', ['as'=> 'mainlog','uses'=> 'AuthController@mainlog']);
+Route::post('/login', ['as'=> 'login','uses'=> 'AuthController@login']);
 
 Route::group(['middleware'=>['authen','prevent-back-history']],function(){
 	Route::get('/logout', ['as'=> 'logout','uses'=>'StaffController@logout']);
@@ -61,16 +53,16 @@ Route::group(['middleware'=>['authen','prevent-back-history']],function(){
 
 	Route::any('/staff/staffitem/{staffitem_id}', ['as'=>'staff_borrow', 'uses'=>'StaffController@staff_borrow']);
 
-Route::post('/staff/staffitem2/{staffitem_id}', ['as'=>'borrow_item', 'uses'=>'StaffController@borrow_item']);
+	Route::post('/staff/staffitem2/{staffitem_id}', ['as'=>'borrow_item', 'uses'=>'StaffController@borrow_item']);
 
-Route::get('/staff/{staffitem_id}/borrowed_item', [
+	Route::get('/staff/{staffitem_id}/borrowed_item', [
 	'as'=> 'view_borrowed_item',
 	'uses'=> 'StaffController@view_borrowed_item'
-]);
-Route::get('/staff/{staffitem_id}/{borrowed_id}/', [
+	]);
+	Route::get('/staff/{staffitem_id}/{borrowed_id}/', [
 	'as'=> 'staff_return',
 	'uses'=> 'StaffController@staff_return'
-]);
+	]);
 	
 });
 

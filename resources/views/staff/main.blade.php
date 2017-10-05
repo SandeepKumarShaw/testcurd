@@ -27,10 +27,17 @@
 				<h3 class="text-center">Utility Inventory List</h3>
 			</div>
 			<div class="panel-body">
+				@if(Session::has('borrow'))
+					<div class="alert alert-success">{{Session::get('borrow')}}</div>
+				@endif
 				@if(Session::has('item'))
 					<div class="alert alert-success">{{Session::get('item')}}</div>
 				@endif
+				<div>
+					<a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#newItems">New</a>
 
+					
+				</div>
 				<table class="table">
 					<thead>
 						<tr>

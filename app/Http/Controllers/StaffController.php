@@ -87,7 +87,5 @@ class StaffController extends Controller
         $quantity = $item->quantity + $borrower_item->quantity;
         StaffItem::where('id', $staffitem_id)->update(['quantity'=> $quantity]);
         return redirect()->back()->with('quantity', 'Item has been return successfully');
-
-
     }
 }
